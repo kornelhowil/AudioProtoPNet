@@ -1,0 +1,26 @@
+# Deepfake LJSpeech + WaveFake
+_target_: audioprotopnet.preprocessing.datasets.deepfake_dataset.DeepfakeDataModule
+
+defaults: 
+  - _self_
+  - transforms: bird_default.yaml
+  - loaders: default.yaml
+  - mapper: null
+
+dataset:
+  data_dir: ${paths.root_dir}
+  dataset_name: deepfake
+  hf_path: null
+  hf_name: ljspeech_melgan # This will be our wavefake_method (subdirectory in datasets/wavefake)
+  seed: ${seed}
+  n_classes: 2
+  n_workers: 1
+  val_split: null
+  task: multilabel
+  subset: null
+  sampling_rate: ${module.network.sampling_rate}
+  class_weights_loss: null
+  class_weights_sampler: null
+  classlimit: null
+  eventlimit: null
+  direct_fingerprint: null
