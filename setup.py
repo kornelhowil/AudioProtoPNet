@@ -13,8 +13,8 @@ with open('requirements.txt', 'r') as f:
     requirements_install = f.readlines()
 
 # Add all the packages in requirements.txt to an extra named '[dev]'
-with open('requirements-dev.txt', 'r') as f:
-    requirements_dev = f.readlines()
+#with open('requirements-dev.txt', 'r') as f:
+#    requirements_dev = f.readlines()
 
 # All the requirements
 requirements = {
@@ -30,9 +30,9 @@ requirements = {
         'sphinx-rtd-theme',  # nicer theme for the html docs
         'sphinx-autodoc-typehints',  # use typehints to provide types
     ],
-    'dev': [
-        r for r in requirements_dev if not r.startswith('-r ')
-    ],
+    #'dev': [
+    #    r for r in requirements_dev if not r.startswith('-r ')
+    #],
 }
 
 URLS = {
