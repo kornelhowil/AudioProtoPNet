@@ -2,14 +2,11 @@ wandb:
   _target_: pytorch_lightning.loggers.WandbLogger
   name: ${module.network.model_name}_${datamodule.dataset.dataset_name}#${seed}_${start_time}
   save_dir: "${paths.log_dir}"
-  mode: offline
+  mode: online
   id: null # pass correct id to resume experiment!
-  project: "audioprotopnet"
+  project: "audioprotopnet-deepfake"
   log_model: False # upload lightning ckpts
-  entity: "deepbirddetect" 
+  entity: "kornelhowil-uniwersytet-jagiello-ski-w-krakowie" 
   group: ""
   tags: []
   job_type: ""
-
-
-
