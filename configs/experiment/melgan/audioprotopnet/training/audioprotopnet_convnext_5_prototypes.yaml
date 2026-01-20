@@ -1,0 +1,40 @@
+# @package _global_
+defaults:
+  - override /datamodule: deepfake.yaml
+  - override /datamodule_push: deepfake.yaml
+  - override /module: audioprotopnet_multilabel.yaml
+  - override /module/network: ppnet_convnext.yaml
+  - override /callbacks: default.yaml
+  - override /trainer: single_gpu.yaml
+  - override /datamodule/transforms: bird_default_multilabel.yaml
+  - override /paths: default.yaml
+  - override /hydra: default.yaml
+
+task_name: "train_deepfake_convnext"
+tags: ["DeepFake", "convnext", "multilabel"]
+seed: 42
+train: True
+test: False
+save_prototype_waveform_files: False
+save_prototype_spectrogram_files: False
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: "deepfake_convnext_5_prototypes"
+    mode: online
+
+module:
+  num_prototypes: 10
+
+callbacks:
+  model_checkpoint:
+    filename: ${module.network.model_name}_${module.training_phase}
+
+datamodule:
+  dataset:
+    direct_fingerprint: /shared/results/z1216473/sound_interpretability/deepfake/AudioProtoPNet/deepfake_processed_42_625a83bdf8d3a53d
+
+datamodule_push:
+  dataset:
+    direct_fingerprint: /shared/results/z1216473/sound_interpretability/deepfake/AudioProtoPNet/deepfake_processed_42_625a83bdf8d3a53d

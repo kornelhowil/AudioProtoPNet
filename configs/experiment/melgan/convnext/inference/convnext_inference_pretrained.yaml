@@ -1,0 +1,29 @@
+# @package _global_
+defaults:
+  - override /datamodule: deepfake.yaml
+  - override /module: multilabel.yaml
+  - override /module/network: convnext.yaml
+  - override /callbacks: default.yaml
+  - override /trainer: single_gpu.yaml
+  - override /datamodule/transforms: bird_default_multilabel.yaml
+  - override /paths: default.yaml
+  - override /hydra: default.yaml
+
+task_name: "train_deepfake_convnext"
+tags: ["DeepFake", "convnext", "multilabel"]
+seed: 42
+train: False
+test: True
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: "deepfake_convnext"
+    mode: online
+
+datamodule:
+  dataset:
+    hf_name: ljspeech_melgan # Default wavefake method
+  loaders:
+    train:
+      batch_size: 32
