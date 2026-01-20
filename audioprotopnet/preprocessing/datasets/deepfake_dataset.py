@@ -78,11 +78,11 @@ class DeepfakeDataModule(BaseDataModuleHF):
             for file_id in ids:
                 real_path = os.path.join(ljspeech_dir, f"{file_id}.wav")
                 audio_paths.append(real_path)
-                labels.append(0) # 0 for Real
+                labels.append(1) # 1 for Real
                 
                 fake_path = os.path.join(wavefake_dir, f"{file_id}_gen.wav")
                 audio_paths.append(fake_path)
-                labels.append(1) # 1 for Fake
+                labels.append(0) # 0 for Fake
             
             # Create Dataset
             dataset_dict[split_name] = Dataset.from_dict({
