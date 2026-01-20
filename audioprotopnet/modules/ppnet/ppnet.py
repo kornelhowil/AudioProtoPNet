@@ -246,24 +246,10 @@ class PPNet(nn.Module):
         self.prototype_class_identity = None
         self.num_prototypes_per_class = None
 
-        if pretrain_info:
-            self.pretrain_info = pretrain_info
-            self.hf_path = pretrain_info.hf_path
-            self.hf_name = (
-                pretrain_info.hf_name
-                if not pretrain_info.hf_pretrain_name
-                else pretrain_info.hf_pretrain_name
-            )
-            self.num_classes = len(
-                datasets.load_dataset_builder(self.hf_path, self.hf_name)
-                .info.features["ebird_code"]
-                .names
-            )
-        else:
-            self.pretrain_info = None
-            self.hf_path = None
-            self.hf_name = None
-            self.num_classes = num_classes
+        self.pretrain_info = None
+        self.hf_path = None
+        self.hf_name = None
+        self.num_classes = num_classes
 
         # Checking the number of prototypes
         if self.num_prototypes % self.num_classes != 0:

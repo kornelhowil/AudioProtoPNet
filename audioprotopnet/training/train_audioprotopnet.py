@@ -424,14 +424,15 @@ def main_audioprotopnet(cfg):
     datamodule_push.setup(stage="fit")
     train_push_loader = datamodule_push.train_dataloader()
 
-    if cfg.datamodule.dataset.dataset_name == "esc50":
-        label_to_category_mapping = datamodule.label_to_category_mapping
-    else:
-        ebird_codes_list = datasets.load_dataset_builder(
-            cfg.datamodule.dataset.hf_path, cfg.datamodule.dataset.hf_name
-        ).info.features["ebird_code"]
-        label_to_category_mapping = dict(enumerate(ebird_codes_list.names))
 
+    #if cfg.datamodule.dataset.dataset_name == "esc50":
+    #    label_to_category_mapping = datamodule.label_to_category_mapping
+    #else:
+    #    ebird_codes_list = datasets.load_dataset_builder(
+    #        cfg.datamodule.dataset.hf_path, cfg.datamodule.dataset.hf_name
+    #    ).info.features["ebird_code"]
+    #    label_to_category_mapping = dict(enumerate(ebird_codes_list.names))
+    label_to_category_mapping = {0: "deepfake", 1: "genuine"}
     # Setup logger
     log.info("Instantiate logger")
     logger = utils.instantiate_loggers(cfg.get("logger"))
