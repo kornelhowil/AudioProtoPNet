@@ -9,8 +9,8 @@ defaults:
   - override /paths: default.yaml
   - override /hydra: default.yaml
 
-task_name: "melgan_convnext"
-tags: ["melgan", "DeepFake", "convnext"]
+task_name: "full_band_melgan_convnext"
+tags: ["full_band_melgan", "DeepFake", "convnext"]
 seed: 42
 train: True
 test: False
@@ -18,7 +18,7 @@ test: False
 logger:
   wandb:
     tags: ${tags}
-    group: "melgan_convnext"
+    group: "full_band_melgan_convnext"
     mode: online
 
 trainer:
@@ -27,7 +27,7 @@ trainer:
 
 datamodule:
   dataset:
-    hf_name: ljspeech_melgan # Default wavefake method
+    hf_name: ljspeech_full_band_melgan # Default wavefake method
   transforms:
     preprocessing:
       mean: -13.369 # Mean of XCL
