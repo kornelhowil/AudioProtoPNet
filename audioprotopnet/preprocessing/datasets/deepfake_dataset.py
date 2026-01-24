@@ -80,7 +80,12 @@ class DeepfakeDataModule(BaseDataModuleHF):
                 audio_paths.append(real_path)
                 labels.append(1) # 1 for Real
                 
-                fake_path = os.path.join(wavefake_dir, f"{file_id}_gen.wav")
+                if os.path.exists(os.path.join(wavefake_dir, f"{file_id}_gen.wav")):
+                    fake_path = os.path.join(wavefake_dir, f"{file_id}_gen.wav")
+                elif os.path.exists(os.path.join(wavefake_dir, f"{file_id}_generated.wav")):
+                    fake_path = os.path.join(wavefake_dir, f"{file_id}_generated.wav")
+                else:
+                    fake_path = os.path.join(wavefake_dir, f"{file_id}.wav")
                 audio_paths.append(fake_path)
                 labels.append(0) # 0 for Fake
             
