@@ -79,9 +79,8 @@ metrics:
     T1Accuracy:
       _target_: birdset.modules.metrics.TopKAccuracy
       topk: 1
-    T3Accuracy:
-      _target_: birdset.modules.metrics.TopKAccuracy
-      topk: 5
+    EqualErrorRate:
+      _target_: birdset.modules.metrics.EqualErrorRate
     mAP:
       _target_: birdset.modules.metrics.mAP
       num_labels: ${datamodule.dataset.n_classes}    
